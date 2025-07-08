@@ -866,10 +866,20 @@ static gmx::FftBackend getFftBackend(const PmeGpu* pmeGpu)
         }
         else
         {
-            GMX_RELEASE_ASSERT(false,
-                               "GROMACS with HIP backend is currently not compatible with Heffte "
-                               "and PME decomposition");
-            return gmx::FftBackend::Count;
+            if (GMX_USE_Heffte)
+            {
+                return gmx::FftBackend::HeFFTe_HIP;
+            }
+            else
+            {
+                GMX_THROW(gmx::NotImplementedError(
+                        "GROMACS must be built with HeFFTe to enable fully GPU-offloaded "
+                        "PME decomposition on ROCm-compatible GPUs"));
+            }
+            //GMX_RELEASE_ASSERT(false,
+            //                   "GROMACS with HIP backend is currently not compatible with Heffte "
+            //                   "and PME decomposition");
+            //return gmx::FftBackend::Count;
         }
     }
     else if (GMX_GPU_SYCL)
