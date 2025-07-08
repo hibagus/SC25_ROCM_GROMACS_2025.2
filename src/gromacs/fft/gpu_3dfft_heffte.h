@@ -104,6 +104,14 @@ private:
     heffte::gpu::vector<float> localRealGrid_;
     //! Local complex grid
     heffte::gpu::vector<std::complex<float>> localComplexGrid_;
+#elif GMX_GPU_HIP
+    // Change from https://gitlab.com/gromacs/gromacs/-/commit/9bb0573501015b243d3b4ddc8740876d4f1521d9
+    //! Raw stream for PME operations
+    hipStream_t pmeRawStream_;
+    //! Local real grid
+    heffte::gpu::vector<float> localRealGrid_;
+    //! Local complex grid
+    heffte::gpu::vector<std::complex<float>> localComplexGrid_;
 #elif GMX_GPU_SYCL
     /*! \brief Raw stream for PME operations
      *

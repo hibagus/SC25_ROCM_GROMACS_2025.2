@@ -74,6 +74,7 @@ enum class FftBackend
     HeFFTe_Sycl_OneMkl, //!< supports only multi-gpu
     HeFFTe_Sycl_Rocfft, //!< supports only multi-gpu
     HeFFTe_Sycl_cuFFT,  //!< supports only multi-gpu
+    HeFFTe_HIP,         //!< supports only multi-gpu, change from https://gitlab.com/gromacs/gromacs/-/commit/9bb0573501015b243d3b4ddc8740876d4f1521d9
     SyclMkl,            //!< supports only single-GPU
     SyclOneMath,        //!< supports only single-GPU
     SyclRocfft,         //!< supports only single-GPU

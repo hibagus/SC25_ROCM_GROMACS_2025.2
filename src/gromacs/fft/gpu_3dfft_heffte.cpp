@@ -120,6 +120,15 @@ cudaStream_t heffteStream(cudaStream_t queue)
                   "Only heFFTe cuFFT backend supported in CUDA build");
     return queue;
 }
+// Change from https://gitlab.com/gromacs/gromacs/-/commit/9bb0573501015b243d3b4ddc8740876d4f1521d9
+#elif GMX_GPU_HIP
+template<typename backend_tag>
+hipStream_t heffteStream(hipStream_t queue)
+{
+    static_assert(std::is_same_v<backend_tag, heffte::backend::rocfft>,
+                  "Only heFFTe rocFFT backend supported in HIP build");
+    return queue;
+}
 
 #endif
 
@@ -367,7 +376,7 @@ Gpu3dFft::ImplHeFfte<backend_tag>::ImplHeFfte(bool                 allocateRealG
 #endif
 
     // allocate grid and return handles to it
-#if GMX_GPU_CUDA
+#if GMX_GPU_CUDA || GMX_GPU_HIP // change from https://gitlab.com/gromacs/gromacs/-/commit/9bb0573501015b243d3b4ddc8740876d4f1521d9
     localRealGrid_    = heffte::gpu::vector<float>(fftPlan_->size_inbox());
     localComplexGrid_ = heffte::gpu::vector<std::complex<float>>(fftPlan_->size_outbox());
     *realGrid         = localRealGrid_.data();
@@ -407,7 +416,7 @@ Gpu3dFft::ImplHeFfte<backend_tag>::~ImplHeFfte<backend_tag>()
 template<typename backend_tag>
 void Gpu3dFft::ImplHeFfte<backend_tag>::perform3dFft(gmx_fft_direction dir, CommandEvent* /*timingEvent*/)
 {
-#if GMX_GPU_CUDA
+#if GMX_GPU_CUDA || GMX_GPU_HIP // change from https://gitlab.com/gromacs/gromacs/-/commit/9bb0573501015b243d3b4ddc8740876d4f1521d9
     float*               realGrid    = localRealGrid_.data();
     std::complex<float>* complexGrid = localComplexGrid_.data();
 #elif GMX_GPU_SYCL
