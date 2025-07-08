@@ -123,6 +123,7 @@ gromacs:gcc-11-hip-622-nightly:test:
     GPU_VENDOR: "AMD"
     GPU_COUNT: 2
     GMX_TEST_LABELS: "QuickGpuTest|SlowGpuTest"
+    GMX_GPU_PME_DECOMPOSITION: 1
   tags:
     - amd-gpu-gfx906
   allow_failure: true   # allow job failure w/o failing pipeline, since no redundant hardware
@@ -140,6 +141,7 @@ gromacs:gcc-11-hip-622-nightly:regressiontest:
     REGRESSIONTEST_TOTAL_RANK_NUMBER: 2
     REGRESSIONTEST_OMP_RANK_NUMBER: 2
     REGRESSIONTEST_PME_RANK_NUMBER: 1
+    GMX_GPU_PME_DECOMPOSITION: 1 
     GPU_VENDOR: "AMD"
     GPU_COUNT: 2
     GMX_TEST_PLUMED_KERNEL_IS_AVAILABLE: "YES"
