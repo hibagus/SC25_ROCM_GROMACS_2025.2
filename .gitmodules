@@ -7,3 +7,6 @@
 [submodule "3rdParty/openmpi"]
 	path = 3rdParty/openmpi
 	url = https://github.com/open-mpi/ompi.git
+[submodule "3rdParty/heffte"]
+	path = 3rdParty/heffte
+	url = https://github.com/icl-utk-edu/heffte.git
