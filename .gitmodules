@@ -1,3 +1,6 @@
 [submodule "3rdParty/ucx"]
 	path = 3rdParty/ucx
 	url = https://github.com/openucx/ucx.git
+[submodule "3rdParty/ucc"]
+	path = 3rdParty/ucc
+	url = https://github.com/openucx/ucc.git
