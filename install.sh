@@ -112,3 +112,6 @@ make -j $(nproc)
 check_exit_code 2
 make install 
 check_exit_code 2
+
+# linking HeFFTe library
+ln -s ${root_dir}/apps/heffte/lib/libheffte.so.2.4.1 ${root_dir}/apps/gromacs/lib/libheffte.so.2
