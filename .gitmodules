@@ -4,3 +4,6 @@
 [submodule "3rdParty/ucc"]
 	path = 3rdParty/ucc
 	url = https://github.com/openucx/ucc.git
+[submodule "3rdParty/openmpi"]
+	path = 3rdParty/openmpi
+	url = https://github.com/open-mpi/ompi.git
